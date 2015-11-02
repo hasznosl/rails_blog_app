@@ -1,0 +1,6 @@
+<h1>Show Comment</h1>
+
+<%= @comment.body %>
+<%= link_to "edit", edit_comment_path(@comment) %>
+<%= link_to "delete", comment_path(@comment), {method: :delete,
+                                              data: {confirm: "Are you sure?"}} %>

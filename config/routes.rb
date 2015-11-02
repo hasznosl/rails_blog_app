@@ -15,7 +15,14 @@ Rails.application.routes.draw do
   get "/posts" => "posts#index"
   delete "/posts/:id" => "posts#destroy"
 
-  #
+  #comment routes
+  get "/comments/new" => "comments#new", as: :new_comment
+  post "/comments" => "comments#create", as: :comments
+  get "/comments/:id" => "comments#show", as: :comment
+  get "/comments/:id/edit" => "comments#edit", as: :edit_comment
+  patch "/comments/:id" => "comments#update"
+  # index here
+  delete "/comments/:id" => "comments#destroy"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
