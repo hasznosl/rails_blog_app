@@ -1,5 +1,5 @@
 
-<h1 class="indie-flower">Blogs</h1>
+<h1 class="indie-flower">Posts</h1>
 <div class="small text-left indie-flower">
   <% if @posts.any?%>
     <%= "(#{@posts.min_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]} - #{@posts.max_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]})" %>
