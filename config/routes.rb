@@ -5,25 +5,29 @@ Rails.application.routes.draw do
   get "/home" => "home#home", as: :home
   get "/about" => "home#about", as: :about
 
-
+  get "/search" => "posts#search", as: :search
+  resources :posts
   # post routes
-  get "/posts/new" => "posts#new", as: :new_post
-  post "/posts" => "posts#create", as: :posts
-  get "/posts/:id" => "posts#show", as: :post
-  get "/posts/:id/edit" => "posts#edit", as: :edit_post
-  patch "/posts/:id" => "posts#update"
-  get "/posts" => "posts#index"
-  delete "/posts/:id" => "posts#destroy"
+  # get "/posts/new" => "posts#new", as: :new_post
+  # post "/posts" => "posts#create", as: :posts
+  # get "/posts/:id" => "posts#show", as: :post
+  # get "/posts/:id/edit" => "posts#edit", as: :edit_post
+  # patch "/posts/:id" => "posts#update"
+  # get "/posts" => "posts#index"
+  # delete "/posts/:id" => "posts#destroy"
 
+  resources :comments
   #comment routes
-  get "/comments/new" => "comments#new", as: :new_comment
-  post "/comments" => "comments#create", as: :comments
-  get "/comments/:id" => "comments#show", as: :comment
-  get "/comments/:id/edit" => "comments#edit", as: :edit_comment
-  patch "/comments/:id" => "comments#update"
-  # index here
-  delete "/comments/:id" => "comments#destroy"
+  # get "/comments/new" => "comments#new", as: :new_comment
+  # post "/comments" => "comments#create", as: :comments
+  # get "/comments/:id" => "comments#show", as: :comment
+  # get "/comments/:id/edit" => "comments#edit", as: :edit_comment
+  # patch "/comments/:id" => "comments#update"
+  # # index here
+  # delete "/comments/:id" => "comments#destroy"
 
+
+  resources :categories
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

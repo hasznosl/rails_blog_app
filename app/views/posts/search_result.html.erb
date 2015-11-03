@@ -1,0 +1,26 @@
+
+<h1 class="indie-flower">Blogs</h1>
+<div class="small text-left indie-flower">
+  <%= "(#{@posts.min_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]} - #{@posts.max_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]})" %>
+</div>
+
+<% @posts.each do |post| %>
+  <div class="">
+    <div class="post-title">
+       <%= post.title %>
+       <div class="indie-flower float-right">
+           <%= link_to  "Read", post_path(post), class: "float-right"%>
+       </div>
+    </div>
+    <div class="small text-left indie-flower">
+      <small><%= post.updated_at.to_s.split(" ")[0] %></small>
+    </div>
+    <div class="post-body">
+      <small><%= post.body[0..1000] %></small>
+    </div>
+    <hr>
+  </div>
+<% end %>
+<div class="text-center indie-flower">
+    <%= paginate @posts %>
+</div>

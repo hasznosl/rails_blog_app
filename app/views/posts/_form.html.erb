@@ -1,5 +1,5 @@
 <p>
-  <%= @post.errors.full_messages.join(", ") %>
+  <%= @post.errors.messages.values.join(", ") %>
 </p>
 
 <%= form_for @post do |f| %>

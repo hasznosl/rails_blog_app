@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-image: url('low_contrast_linen.png');
+}
+
+.post-title {
+  font-family: 'Bangers', cursive;
+  color: #801A00;
+  font-size: 26px;
+}
+
+.post-body {
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 20px;
+}
+
+.indie-flower {
+  font-family: 'Indie Flower', cursive;
+  font-size: 20px;
+}
+
+
+.float-right {
+  float: right;
+  clear: right;
+}
+
+.jumbotron {
+  background-color: #E4E4E4;
+}

@@ -7,6 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-posts = Post.create([{title: "my first title", body: "my first body"},
-  {title: "my second title", body: "my second body"},
-  {title: "my third title", body: "my third body"},  ])
+array = Array.new
+
+100.times do
+  hash = Hash.new
+  hash[:title] = Faker::Name.title
+  hash[:body] = Faker::Lorem.paragraphs(rand(5)+1).join(" ")
+  array.push(hash)
+end
+
+posts = Post.create(array)
