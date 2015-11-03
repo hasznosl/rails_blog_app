@@ -34,14 +34,9 @@ class PostsController < ApplicationController
   def show
   end
 
-  def search_result posts
-    @posts = posts.order(:updated_at).page(params[:page]).per(5)
-    render :search_result
-  end
 
   def search
-    @posts = Post.search(params[:search])
-    search_result(@posts)
+    @posts = Post.search(params[:search]).order(:updated_at).page(params[:page]).per(5)
   end
 
   def destroy

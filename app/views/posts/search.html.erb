@@ -1,7 +1,9 @@
 
 <h1 class="indie-flower">Blogs</h1>
 <div class="small text-left indie-flower">
-  <%= "(#{@posts.min_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]} - #{@posts.max_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]})" %>
+  <% if @posts.any?%>
+    <%= "(#{@posts.min_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]} - #{@posts.max_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]})" %>
+  <% end %>
 </div>
 
 <% @posts.each do |post| %>

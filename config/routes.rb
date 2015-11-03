@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/home" => "home#home", as: :home
   get "/about" => "home#about", as: :about
 
-  get "/search" => "posts#search", as: :search
+  get "/posts/search" => "posts#search", as: :search
   resources :posts
   # post routes
   # get "/posts/new" => "posts#new", as: :new_post
