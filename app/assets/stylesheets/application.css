@@ -37,7 +37,11 @@ body {
 
 .float-right {
   float: right;
-  clear: right;
+  clear: both;
+}
+
+.align-right {
+  text-align: right;
 }
 
 .jumbotron {

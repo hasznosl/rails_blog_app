@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get "/about" => "home#about", as: :about
 
   get "/posts/search" => "posts#search", as: :search
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
+
+
   # post routes
   # get "/posts/new" => "posts#new", as: :new_post
   # post "/posts" => "posts#create", as: :posts
@@ -16,15 +20,7 @@ Rails.application.routes.draw do
   # get "/posts" => "posts#index"
   # delete "/posts/:id" => "posts#destroy"
 
-  resources :comments
-  #comment routes
-  # get "/comments/new" => "comments#new", as: :new_comment
-  # post "/comments" => "comments#create", as: :comments
-  # get "/comments/:id" => "comments#show", as: :comment
-  # get "/comments/:id/edit" => "comments#edit", as: :edit_comment
-  # patch "/comments/:id" => "comments#update"
-  # # index here
-  # delete "/comments/:id" => "comments#destroy"
+
 
 
   resources :categories

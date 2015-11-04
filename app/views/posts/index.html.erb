@@ -1,14 +1,17 @@
-
+<% page_posts = @posts[(@page_index.to_i-1)*@posts_per_page...(@page_index.to_i*@posts_per_page)] %>
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-6 col-sm-6 col-xs-12">
     <h1 class="indie-flower">Posts</h1>
     <div class="small text-left indie-flower">
-      <% if @posts.any?%>
-        <%= "(#{@posts.min_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]} - #{@posts.max_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]})" %>
+      <% if page_posts.any?%>
+        <%= "(#{page_posts.min_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]} - #{page_posts.max_by{|p| p.updated_at}.updated_at.to_s.split(" ")[0]})" %>
+      <% else %>
+        <%= page_posts %>
+        <%= "page_index: #{@page_index}" %>
       <% end %>
     </div>
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-6 col-sm-6 col-xs-12">
     <%= form_tag "/posts/search", method: "get" do %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search for..." %>
@@ -19,8 +22,17 @@
     <% end %>
   </div>
 </div>
+<div class="row">
+  <div class="col-lg-6 col-sm-6 col-xs-12">
+
+  </div>
+  <div class="col-lg-6 col-sm-6 col-xs-12">
+    <%= render "pagination" %>
+  </div>
+</div>
 <hr>
-<% @posts.each do |post| %>
+
+<% page_posts.each do |post| %>
   <div class="">
     <div class="post-title">
        <%= post.title %>
@@ -37,6 +49,3 @@
     <hr>
   </div>
 <% end %>
-<div class="text-center indie-flower">
-    <%= paginate @posts %>
-</div>
