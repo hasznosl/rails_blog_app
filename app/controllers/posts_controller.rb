@@ -8,7 +8,6 @@ class PostsController < ApplicationController
     @posts_per_page = 5
     @page_index = params[:page_index]
     @page_index ||= 1
-    puts "page index: #{@page_index}"
     render :index
   end
 
@@ -44,7 +43,8 @@ class PostsController < ApplicationController
   def search
     @posts = Post.search(params[:search]).order(:updated_at)
     @posts_per_page = 5
-    @page_index = 1
+    @page_index = params[:page_index]
+    @page_index ||= 1
     render :search
   end
 
