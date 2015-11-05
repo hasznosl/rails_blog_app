@@ -3,13 +3,13 @@ class PostsController < ApplicationController
 
   before_action :find_post, {only: [:update, :show, :edit, :destroy]}
 
-  def index
-    @posts = Post.order(:updated_at)
-    @posts_per_page = 5
-    @page_index = params[:page_index]
-    @page_index ||= 1
-    render :index
-  end
+  # def index
+  #   @posts = Post.order(:updated_at)
+  #   @posts_per_page = 5
+  #   @page_index = params[:page_index]
+  #   @page_index ||= 1
+  #   render :index
+  # end
 
   def new
     @post = Post.new
@@ -40,12 +40,12 @@ class PostsController < ApplicationController
   end
 
 
-  def search
+  def index
     @posts = Post.search(params[:search]).order(:updated_at)
     @posts_per_page = 5
     @page_index = params[:page_index]
     @page_index ||= 1
-    render :search
+    render :index
   end
 
   def destroy
