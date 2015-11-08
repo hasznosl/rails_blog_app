@@ -8,25 +8,42 @@
     <%= @post.body %>
   </p>
   <div class="align-right indie-flower">
+    <% if can? :edit, @post %>
     <%= link_to "edit", edit_post_path(@post) %> &nbsp&nbsp&nbsp
+    <% end %>
+    <% if can? :destroy, @post %>
     <%= link_to "delete", post_path(@post), {method: :delete,
                                             data: {confirm: "Are you sure!"}} %>
+    <% end %>
   </div>
 </div>
 
 <hr>
 <% @post.comments.each do |comment| %>
-    <p class="indie-flower">
-      <%= comment.body %>
-    </p>
+    <div class="indie-flower">
+      <% if comment.user %>
+      <div class="small">
+        <%= "#{comment.user.first_name} #{comment.user.last_name}" %>
+      </div>
+      <% end %>
+      <div class="">
+        <%= comment.body %>
+      </div>
+    </div>
     <hr>
 <% end %>
 
-<%= form_for [@post, @comment] do |f| %>
-  <div class="form-group">
-    <%= f.text_area :body, class: "form-control", placeholder: "Enter your comment here..." %>
-  </div>
-  <div class="form-group indie-flower">
-    <%= f.submit "Submit Comment", class: "btn btn-default btn-lg" %>
+<% if user_signed_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :body, class: "form-control", placeholder: "Enter your comment here..." %>
+    </div>
+    <div class="form-group indie-flower">
+      <%= f.submit "Submit Comment", class: "btn btn-default btn-lg" %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="bangers">
+    Log in to comment.
   </div>
 <% end %>

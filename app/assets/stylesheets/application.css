@@ -24,6 +24,12 @@ body {
   font-size: 26px;
 }
 
+.bangers {
+  font-family: 'Bangers', cursive;
+  color: #801A00;
+  font-size: 40px;
+}
+
 .post-body {
   font-family: 'Reenie Beanie', cursive;
   font-size: 20px;

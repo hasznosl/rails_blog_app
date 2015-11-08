@@ -12,11 +12,22 @@
   <%= render "/layouts/nav" %>
 
 
+
   <div class="container-fluid">
+
     <div class="col-md-2 col-sm-0 col-xs-0">
 
     </div>
     <div class="col-md-8 col-sm-12 col-xs-12 jumbotron">
+      <div class="indie-flower">
+        <% flash.each do |key, value|%>
+          <%= content_tag :div, value, class: "flash #{key}" %>
+        <% end %>
+        <% if user_signed_in? %>
+        <%= "Logged in as #{current_user.first_name} #{current_user.last_name}" %>
+        <% end %>
+      </div>
+
       <%= yield %>
     </div>
     <div class="col-md-2 col-sm-0 col-xs-0">

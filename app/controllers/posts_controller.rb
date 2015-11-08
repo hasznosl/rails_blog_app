@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-
+  before_action :authorize, only: [:edit, :update, :destroy]
   before_action :find_post, {only: [:update, :show, :edit, :destroy]}
 
   # def index
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
     if @post.save
       redirect_to post_path(@post)
     else
@@ -25,6 +26,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path, alert: "Access denied!" unless can? :edit, @post
   end
 
   def update
@@ -54,6 +56,10 @@ class PostsController < ApplicationController
     else
       render post_path(@post)
     end
+  end
+
+  def authorize
+    redirect_to root_path, alert: "Access denied!" unless can? :manage, @post
   end
 
   private

@@ -1,15 +1,16 @@
-<p>
+<div class="indie-flower">
   <%= @post.errors.messages.values.join(", ") %>
-</p>
+</div>
+
 
 <%= form_for @post do |f| %>
-  <div class="">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title, class: "indie-flower" %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
-  <div class="">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+  <div class="form-group">
+    <%= f.label :body, class: "indie-flower" %>
+    <%= f.text_area :body, class: "form-control" %>
   </div>
-  <%= f.submit %>
+  <%= f.submit "Edit Post", class: "btn btn-default indie-flower"%>
 <% end %>

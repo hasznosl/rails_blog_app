@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
 
+  before_action :authenticate_user, except: [:index, :show]
+  before_action :find_question, only: [:show, :edit, :update, :destroy]
+
   def new
     @comment = Comment.new
   end
@@ -8,6 +11,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @post = Post.find(params[:post_id])
     @comment.post = @post
+    @comment.user = current_user
     if @comment.save
       redirect_to post_path(@post)
     else
@@ -16,15 +20,12 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @comment = Comment.find(params[:id])
   end
 
   def edit
-    @comment = Comment.find(params[:id])
   end
 
   def update
-    @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
       redirect_to comment_path(@comment)
     else
@@ -33,7 +34,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     if @comment.destroy
       redirect_to home_path
     else
