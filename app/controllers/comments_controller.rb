@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   before_action :authenticate_user, except: [:index, :show]
-  before_action :find_question, only: [:show, :edit, :update, :destroy]
+  before_action :find_comment, only: [:show, :edit, :update, :destroy]
 
   def new
     @comment = Comment.new
@@ -44,6 +44,10 @@ class CommentsController < ApplicationController
   private
     def comment_params
       params.require(:comment).permit(:body)
+    end
+
+    def find_comment
+      @comment = Comment.find(params[:id])
     end
 
 end

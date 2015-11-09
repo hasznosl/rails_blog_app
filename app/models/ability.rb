@@ -6,7 +6,11 @@ class Ability
     user ||= User.new
 
     can :manage, Comment do |comment|
-      user = comment.user
+      user == comment.user
+    end
+
+    can :manage, Post do |post|
+      user.email == "hasznos.laszlo@gmail.com"
     end
 
     # Define abilities for the passed in user here. For example:

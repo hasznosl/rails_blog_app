@@ -29,6 +29,12 @@
       <div class="">
         <%= comment.body %>
       </div>
+      <div class="align-right indie-flower">
+        <% if can? :destroy, comment %>
+        <%= link_to "delete", post_comment_path(@post,comment), {method: :delete,
+                                                data: {confirm: "Are you sure!"}} %>
+        <% end %>
+      </div>
     </div>
     <hr>
 <% end %>

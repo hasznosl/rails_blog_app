@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.search(params[:search]).order(:updated_at)
+    @posts = Post.search(params[:search]).order(:updated_at).reverse
     @posts_per_page = 5
     @page_index = params[:page_index]
     @page_index ||= 1

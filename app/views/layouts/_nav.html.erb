@@ -11,6 +11,9 @@
         <% else %>
         <li><%= link_to "Log Out", sessions_path, method: :delete %></li>
         <% end %>
+        <% if can? :create, Post.new %>
+        <li><%= link_to "Create New Post", new_post_path %></li>
+        <% end %>
       </ul>
 
     </div>
