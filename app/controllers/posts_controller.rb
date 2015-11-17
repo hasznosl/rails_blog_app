@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
-  before_action :authorize, only: [:edit, :update, :destroy]
   before_action :find_post, {only: [:update, :show, :edit, :destroy]}
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   # def index
   #   @posts = Post.order(:updated_at)
@@ -68,7 +68,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit([:title, :body])
+      params.require(:post).permit([:title, :body, {tag_ids: []}])
     end
 
 end

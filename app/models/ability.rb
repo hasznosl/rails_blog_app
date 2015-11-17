@@ -10,7 +10,7 @@ class Ability
     end
 
     can :manage, Post do |post|
-      user.email == "hasznos.laszlo@gmail.com"
+      user == post.user
     end
 
     # Define abilities for the passed in user here. For example:

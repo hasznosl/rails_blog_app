@@ -3,6 +3,15 @@
   <h1><%= @post.title %></h1>
 </div>
 <hr>
+<% if @post.tags.any? %>
+  <% @post.tags.each do |tag| %>
+  &nbsp
+    <div class="label label-default">
+      <%= tag.name %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="">
   <p class="post-body">
     <%= @post.body %>
