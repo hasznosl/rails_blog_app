@@ -13,6 +13,14 @@ class Ability
       user == post.user
     end
 
+    can :create, Favourite do |f|
+      user != f.post_creator_user
+    end
+
+    can :destroy, Favourite do |f|
+      user == f.post_creator_user
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

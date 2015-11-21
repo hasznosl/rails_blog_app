@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
+    resources :favourites, only: [:create, :destroy]
   end
 
   resources :users, only: [:new, :create]
@@ -14,6 +15,13 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+  resources :categories
+
+
+
+
+
 
 
   # post routes
@@ -28,7 +36,6 @@ Rails.application.routes.draw do
 
 
 
-  resources :categories
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

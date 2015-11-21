@@ -12,7 +12,18 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
+ .fav{
+   float: right;
+ }
+
+.fav a{
+  color: orange;
+  font-size: 20px;
+}
+
 
 body {
   background-image: url('low_contrast_linen.png');

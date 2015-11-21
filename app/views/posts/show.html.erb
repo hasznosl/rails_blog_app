@@ -11,6 +11,30 @@
     </div>
   <% end %>
 <% end %>
+&nbsp
+<% if((user_signed_in?) && (can? :create, @post.favourites.new))  %>
+  <div class="fav">
+    <% if @post.fav_by current_user %>
+       <%= link_to fa_icon("star"), [@post, @post.favourite_for(current_user)], method: :delete %>
+      <%= @post.favs_count %>, including you.
+    <% else %>
+      <%= link_to fa_icon("star-o"), post_favourites_path(@post), method: :post%>
+      <%= @post.favs_count %>.
+    <% end %>
+
+  </div>
+<% elsif(user_signed_in?) && !(can? :create, @post.favourites.new) %>
+  <div class="fav">
+    <% if @post.fav_by current_user %>
+       <%= fa_icon("star")%>
+      <%= @post.favs_count %>, including you.
+    <% else %>
+      <%= fa_icon("star-o")%>
+      <%= @post.favs_count %>.
+    <% end %>
+
+  </div>
+<% end %>
 
 <div class="">
   <p class="post-body">
