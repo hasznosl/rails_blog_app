@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get "/home" => "home#home", as: :home
   get "/about" => "home#about", as: :about
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
   resources :posts do
     resources :comments
     resources :favourites, only: [:create, :destroy]
