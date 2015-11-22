@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @comment.user = current_user
     if @comment.save
+      CommentsMailer.notify_post_owner(@post, @comment.user.full_name).deliver_now
       redirect_to post_path(@post)
     else
       render "/posts/show"

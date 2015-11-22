@@ -14,6 +14,11 @@ class Post < ActiveRecord::Base
   validates :title, {presence: true,
                     uniqueness: {message: "Post title already exists"}}
 
+
+  def creator_user_name
+    user.full_name
+  end
+
   def self.search(string)
     where("title ILIKE ? OR body ILIKE ?", "%#{string}%", "%#{string}%")
   end

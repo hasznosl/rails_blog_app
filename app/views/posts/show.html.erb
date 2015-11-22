@@ -1,6 +1,8 @@
-
 <div class="post-title">
   <h1><%= @post.title %></h1>
+  <p>
+    by: <%= @post.creator_user_name %>
+  </p>
 </div>
 <hr>
 <% if @post.tags.any? %>
