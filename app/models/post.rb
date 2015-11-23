@@ -9,11 +9,12 @@ class Post < ActiveRecord::Base
   has_many :favourites, dependent: :destroy
   has_many :favouriting_users, through: :favourites, source: :user
 
-
+  mount_uploader :image, ImageUploader
 
   validates :title, {presence: true,
                     uniqueness: {message: "Post title already exists"}}
 
+  validates :body, presence: true
 
   def creator_user_name
     user.full_name

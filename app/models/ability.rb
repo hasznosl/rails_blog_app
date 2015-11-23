@@ -9,9 +9,14 @@ class Ability
       user == comment.user
     end
 
-    can :manage, Post do |post|
+    can :destroy, Post do |post|
       user == post.user
     end
+
+    can :create, Post do |post|
+      user != nil
+    end
+
 
     can :create, Favourite do |f|
       user != f.post_creator_user
