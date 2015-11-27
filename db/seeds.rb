@@ -13,6 +13,7 @@ array = Array.new
   hash = Hash.new
   hash[:title] = Faker::Name.title
   hash[:body] = Faker::Lorem.paragraphs(rand(5)+1).join(" ")
+  hash[:user_id] = User.first
   array.push(hash)
 end
 

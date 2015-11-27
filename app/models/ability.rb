@@ -9,7 +9,7 @@ class Ability
       user == comment.user
     end
 
-    can :destroy, Post do |post|
+    can :manage, Post do |post|
       user == post.user
     end
 
@@ -17,13 +17,12 @@ class Ability
       user != nil
     end
 
-
     can :create, Favourite do |f|
       user != f.post_creator_user
     end
 
     can :destroy, Favourite do |f|
-      user == f.post_creator_user
+      user == f.post_creator_user || user == f.user
     end
 
     # Define abilities for the passed in user here. For example:
