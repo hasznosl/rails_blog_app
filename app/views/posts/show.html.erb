@@ -60,33 +60,20 @@
 </div>
 
 <hr>
-<% @post.comments.each do |comment| %>
-    <div class="indie-flower">
-      <% if comment.user %>
-      <div class="small">
-        <%= "#{comment.user.first_name} #{comment.user.last_name}" %>
-      </div>
-      <% end %>
-      <div class="">
-        <%= comment.body %>
-      </div>
-      <div class="align-right indie-flower">
-        <% if can? :destroy, comment %>
-        <%= link_to "delete", post_comment_path(@post,comment), {method: :delete,
-                                                data: {confirm: "Are you sure!"}} %>
-        <% end %>
-      </div>
-    </div>
-    <hr>
-<% end %>
+<div id="comments">
+  <% @post.comments.each do |comment| %>
+      <%= render "/comments/comment", comment: comment %>
+      <hr>
+  <% end %>
+</div>
 
 <% if user_signed_in? %>
-  <%= simple_form_for [@post, @comment] do |f| %>
-    <div class="indie-flower">
+  <%= simple_form_for [@post, @comment], remote: true do |f| %>
+    <div class="indie-flower", id="comment-body">
       <%= f.input :body, placeholder: "Enter your comment here..." %>
     </div>
     <div class="indie-flower">
-      <%= f.submit "Submit Comment", class: "btn btn-default btn-lg" %>
+      <%=   f.submit "Submit Comment", class: "btn btn-default btn-lg", data: {disable_with: "Saving..."} %>
     </div>
   <% end %>
 <% else %>

@@ -12,11 +12,15 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment.post = @post
     @comment.user = current_user
-    if @comment.save
-      CommentsMailer.notify_post_owner(@post, @comment.user.full_name).deliver_later
-      redirect_to post_path(@post)
-    else
-      render "/posts/show"
+    respond_to do |format|
+      if @comment.save
+        CommentsMailer.notify_post_owner(@post, @comment.user.full_name).deliver_later
+        format.html {redirect_to post_path(@post)}
+        format.js {render :create_success}
+      else
+        format.html {render "/posts/show"}
+        format.js {render js: "alert('failure');"}
+      end
     end
   end
 
@@ -35,8 +39,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    post = @comment.post
     if @comment.destroy
-      redirect_to home_path
+      redirect_to post_path(post)
     else
       render :show
     end

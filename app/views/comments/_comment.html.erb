@@ -1,0 +1,16 @@
+<div class="indie-flower">
+  <% if comment.user %>
+  <div class="small">
+    <%= "#{comment.user.first_name} #{comment.user.last_name}" %>
+  </div>
+  <% end %>
+  <div class="">
+    <%= comment.body %>
+  </div>
+  <div class="align-right indie-flower">
+    <% if can? :destroy, comment %>
+    <%= link_to "delete", post_comment_path(@post,comment), {method: :delete,
+                                            data: {confirm: "Are you sure!"}} %>
+    <% end %>
+  </div>
+</div>
