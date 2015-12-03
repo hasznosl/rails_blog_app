@@ -1,4 +1,4 @@
-<div class="indie-flower">
+<div class="indie-flower" id="<%= dom_id(comment) %>">
   <% if comment.user %>
   <div class="small">
     <%= "#{comment.user.first_name} #{comment.user.last_name}" %>
@@ -10,7 +10,9 @@
   <div class="align-right indie-flower">
     <% if can? :destroy, comment %>
     <%= link_to "delete", post_comment_path(@post,comment), {method: :delete,
-                                            data: {confirm: "Are you sure!"}} %>
+                                            data: {confirm: "Are you sure!",
+                                              disable_with: "Deleting..."},
+                                              remote: true} %>
     <% end %>
   </div>
 </div>

@@ -53,20 +53,14 @@
     <%= link_to "edit", edit_post_path(@post) %> &nbsp&nbsp&nbsp
     <% end %>
     <% if can? :destroy, @post %>
-    <%= link_to "delete", post_path(@post), {method: :delete,
-                                            data: {confirm: "Are you sure!"}} %>
+    <%= link_to "delete", post_path(@post),
+                        {
+                          method: :delete,
+                          data: {confirm: "Are you sure!"}
+                        } %>
     <% end %>
   </div>
 </div>
-
-<hr>
-<div id="comments">
-  <% @post.comments.each do |comment| %>
-      <%= render "/comments/comment", comment: comment %>
-      <hr>
-  <% end %>
-</div>
-
 <% if user_signed_in? %>
   <%= simple_form_for [@post, @comment], remote: true do |f| %>
     <div class="indie-flower", id="comment-body">
@@ -81,3 +75,11 @@
     Log in to comment.
   </div>
 <% end %>
+
+<hr>
+<div id="comments">
+  <% @post.comments.each do |comment| %>
+      <%= render "/comments/comment", comment: comment %>
+      <hr>
+  <% end %>
+</div>

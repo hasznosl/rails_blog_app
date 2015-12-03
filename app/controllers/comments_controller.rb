@@ -40,10 +40,13 @@ class CommentsController < ApplicationController
 
   def destroy
     post = @comment.post
-    if @comment.destroy
-      redirect_to post_path(post)
-    else
-      render :show
+    respond_to do |format|
+      if @comment.destroy
+        format.html {redirect_to post_path(post)}
+        format.js {render}
+      else
+        format.html {render :show}
+      end
     end
   end
 
