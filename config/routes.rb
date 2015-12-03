@@ -2,8 +2,41 @@ Rails.application.routes.draw do
 
   root "home#home"
 
-  get "/home" => "home#home"
-  get "/about" => "home#about"
+  get "/home" => "home#home", as: :home
+  get "/about" => "home#about", as: :about
+
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
+  resources :posts do
+    resources :comments
+    resources :favourites, only: [:create, :destroy]
+  end
+
+  resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
+  resources :categories
+
+
+
+
+
+
+
+  # post routes
+  # get "/posts/new" => "posts#new", as: :new_post
+  # post "/posts" => "posts#create", as: :posts
+  # get "/posts/:id" => "posts#show", as: :post
+  # get "/posts/:id/edit" => "posts#edit", as: :edit_post
+  # patch "/posts/:id" => "posts#update"
+  # get "/posts" => "posts#index"
+  # delete "/posts/:id" => "posts#destroy"
+
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

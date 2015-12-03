@@ -1,0 +1,85 @@
+<div class="post-image">
+  <% if @post.image.present? %>
+    <%= image_tag @post.image.url(:medium) %>
+  <% end %>
+</div>
+
+<div class="post-title">
+  <h1><%= @post.title %></h1>
+  <p>
+    by: <%= @post.creator_user_name %>
+  </p>
+</div>
+<hr>
+<% if @post.tags.any? %>
+  <% @post.tags.each do |tag| %>
+  &nbsp
+    <div class="label label-default">
+      <%= tag.name %>
+    </div>
+  <% end %>
+<% end %>
+&nbsp
+<% if((user_signed_in?) && (can? :create, @post.favourites.new))  %>
+  <div class="fav">
+    <% if @post.fav_by current_user %>
+       <%= link_to fa_icon("star"), [@post, @post.favourite_for(current_user)], method: :delete %>
+      <%= @post.favs_count %>, including you.
+    <% else %>
+      <%= link_to fa_icon("star-o"), post_favourites_path(@post), method: :post%>
+      <%= @post.favs_count %>.
+    <% end %>
+
+  </div>
+<% elsif(user_signed_in?) && !(can? :create, @post.favourites.new) %>
+  <div class="fav">
+    <% if @post.fav_by current_user %>
+       <%= fa_icon("star")%>
+      <%= @post.favs_count %>, including you.
+    <% else %>
+      <%= fa_icon("star-o")%>
+      <%= @post.favs_count %>.
+    <% end %>
+
+  </div>
+<% end %>
+
+<div class="">
+  <p class="post-body">
+    <%= @post.body %>
+  </p>
+  <div class="align-right indie-flower">
+    <% if can? :edit, @post %>
+    <%= link_to "edit", edit_post_path(@post) %> &nbsp&nbsp&nbsp
+    <% end %>
+    <% if can? :destroy, @post %>
+    <%= link_to "delete", post_path(@post),
+                        {
+                          method: :delete,
+                          data: {confirm: "Are you sure!"}
+                        } %>
+    <% end %>
+  </div>
+</div>
+<% if user_signed_in? %>
+  <%= simple_form_for [@post, @comment], remote: true do |f| %>
+    <div class="indie-flower", id="comment-body">
+      <%= f.input :body, placeholder: "Enter your comment here..." %>
+    </div>
+    <div class="indie-flower">
+      <%=   f.submit "Submit Comment", class: "btn btn-default btn-lg", data: {disable_with: "Saving..."} %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="bangers">
+    Log in to comment.
+  </div>
+<% end %>
+
+<hr>
+<div id="comments">
+  <% @post.comments.each do |comment| %>
+      <%= render "/comments/comment", comment: comment %>
+      <hr>
+  <% end %>
+</div>

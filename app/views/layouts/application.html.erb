@@ -5,11 +5,34 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <%= render "/layouts/nav" %>
 
-  <%= yield %>
+
+
+  <div class="container-fluid">
+
+    <div class="col-md-2 col-sm-0 col-xs-0">
+
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12 jumbotron">
+      <div class="indie-flower">
+        <% flash.each do |key, value|%>
+          <%= content_tag :div, value, class: "flash #{key}" %>
+        <% end %>
+        <% if user_signed_in? %>
+        <%= "Logged in as #{current_user.first_name} #{current_user.last_name}" %>
+        <% end %>
+      </div>
+
+      <%= yield %>
+    </div>
+    <div class="col-md-2 col-sm-0 col-xs-0">
+    </div>
+  </div>
 
 </body>
 </html>

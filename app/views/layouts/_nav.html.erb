@@ -1,9 +1,22 @@
-<nav>
+<nav class="navbar navbar-default indie-flower">
   <div class="container-fluid">
     <div class="navbar-header">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "Home", home_path %></li>
+        <li><%= link_to "Posts", posts_path %></li>
+        <% unless user_signed_in? %>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+        <li><%= link_to "Log In", new_session_path %></li>
+        <% else %>
+        <li><%= link_to "Log Out", sessions_path, method: :delete %></li>
+        <% end %>
+        <% if can? :create, Post.new %>
+        <li><%= link_to "Create New Post", new_post_path %></li>
+        <% end %>
+      </ul>
 
     </div>
+
   </div>
-  <%= link_to "about", about_path %>
-  <%= link_to "home", home_path %>
 </nav>
