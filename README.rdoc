@@ -1,28 +1,10 @@
-== README
+A simple blog app created with Rails and PostgreSQL in the backend, and JQuery/Ajax/Bootstrap in the Frontend.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+features:
+- login / logout
+- attaching image to posts
+- create / edit / delete posts
+- create comments for posts (ajax)
+- favouriting posts (cannot favourite own post)
+- searching for terms
+- pagination among all or filtered posts
